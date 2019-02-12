@@ -12,7 +12,7 @@ Server offers the following benefits :
 ------
 * It's light and fast.
 * Easy to learn and use.
-* Send data as Integer, Float, Double, String, JSONArray and JSONObject.
+* Send data as Boolean, Integer, Float, Double, String, JSONArray and JSONObject.
 * Receive data as String, JSONArray or JSONObject.
 * Awesome methods and 100% controls.
 * Very friendly with PHP.
@@ -41,17 +41,14 @@ Usage
 **Example in JAVA**
 ```java
 public class MainActivity extends AppCompatActivity {
-
-    String TAG = "server123";
-    
-    @Override
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         Conn c = new Conn();
-        c.data("data");
-        c.connect("php page link");
+        c.data("hello world");
+        c.connect("https://your_link.php");
     }
 
     class Conn extends Server {
@@ -81,16 +78,13 @@ public class MainActivity extends AppCompatActivity {
 **Example in Kotlin**
 ```kotlin
 class MainActivity : AppCompatActivity() {
-    
-    val TAG = "server123"
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val c = Conn()
         c.data("hello world")
-        c.connect("your link")
+        c.connect("https://your_link.php")
     }
 
     inner class Conn : Server(){
@@ -111,4 +105,83 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+```
+
+**PHP programm for server [your_link.php]**
+```php
+<?php 
+require "conn.php";
+$data = $_POST["app_data"]; // hello world
+
+// your activity
+
+$conn->close();
+?>
+```
+
+**conn.php**
+```php 
+<?php 
+$db_name = "databaseName";
+$mysql_username = "username";
+$mysql_password = "password";
+$server_name = "serverName";
+$conn = mysqli_connect($server_name, $mysql_username, $mysql_password, $db_name);
+?>
+```
+
+Methods
+---------
+**Sending Methods**
+Those methods are using when developer want to connect with the server.
+
+| Methods              | Description   |
+| ---------------------|---------------|
+| void data()          | This method takes data for send to the server. |
+| void requestId()     | Every time Server Library will throw an integer `requestId` with the result. By default, it is `0`. Using this method the developer can change `requestId`. |
+| void postName()      | For more security developer can change `postName` using this method. By default post name is `app_data`. |
+| void errorMessage()  | A developer can throw an error from the server by print only the text `_error`. This is the default error message. To change this default error text developer can use this method. |
+| void connect()       | This is the most important method and it is *required*. This method takes a string link as a parameter. It is required to write this method as the last method of this table. |
+
+
+**Receiving Methods**
+After server activity, those methods will run automatically.
+
+| Methods                 | Description   |
+| ------------------------|---------------|
+| void ifRequestFailed()  | This method will invoke when the system can't connect with the server. |
+| void ifNoResult()       | This method will invoke when server doesn't throw any result. |
+| void ifError()          | This method will invoke when server throws an error message. |
+| void result()           | This method will invoke when the server throws a valid data. |
+
+Changelog
+---------
+* **1.0.0**
+    * Initial release
+
+
+License
+-------
+```
+	MIT License
+
+	Copyright (c) 2019 beingUP
+
+	Permission is hereby granted, free of charge, to any person obtaining a copy
+	of this software and associated documentation files (the "Software"), to deal
+	in the Software without restriction, including without limitation the rights
+	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	copies of the Software, and to permit persons to whom the Software is
+	furnished to do so, subject to the following conditions:
+
+	The above copyright notice and this permission notice shall be included in all
+	copies or substantial portions of the Software.
+
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+	SOFTWARE.
 ```
