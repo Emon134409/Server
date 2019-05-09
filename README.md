@@ -6,7 +6,7 @@
     <a href="http://www.beingup.net"><img src="img/website.png" height="20"></a>
   </p>
 </p>
-<p>Server is a light and fast library that makes networking for Android apps very simple. It is designed for transfer data between the Android app and server. Another major advantage of this is that it is very friendly with PHP.</p>
+<p>Server is a light and fast library that makes networking for Android apps very simple. It is designed for transfer data between the Android app and server.</p>
 
 Server offers the following benefits :
 ------
@@ -15,7 +15,6 @@ Server offers the following benefits :
 * Send data as Boolean, Integer, Float, Double, String, JSONArray and JSONObject.
 * Receive data as String, JSONArray or JSONObject.
 * Awesome methods and 100% controls.
-* Very friendly with PHP.
 
 build.gradle (Project)
 ------
