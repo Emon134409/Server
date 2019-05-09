@@ -31,11 +31,11 @@ build.gradle (Module: app)
 ------
 ```
 dependencies {
-	implementation 'com.github.beingup:Server:1.0.0'
+	implementation 'com.github.beingUP:Server:1.0.0'
 }
 ```
 
-Usage
+Tutorial
 -----
 **Example in JAVA**
 ```java
